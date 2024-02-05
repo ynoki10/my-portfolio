@@ -1,38 +1,28 @@
+import { InferGetStaticPropsType } from 'next';
+
+import NormalPage from '@/components/pages/normalPage';
+import ProjectPage from '@/components/pages/projectPage';
 import Layout from '@/components/site-parts/layout';
 
 import { client } from '@/lib/microcms-client';
-import { PagesContent, SettingsResponse } from '@/types/apiResponse';
-type Props = {
-  pages: PagesContent[];
-  page: PagesContent;
-};
+import { PagesContent, ProjectsContent, SettingsResponse } from '@/types/apiResponse';
 
-export default function Page({ pages, page }: Props) {
+type PageProps = InferGetStaticPropsType<typeof getStaticProps>;
+
+export default function Page({ pages, page, isProjectPage, projects }: PageProps) {
   return (
     <Layout pages={pages}>
-      <section className="w-full py-12 sm:py-24 md:py-32 lg:py-48">
-        <div className="container px-4 md:px-6">
-          <div className="space-y-4">
-            <div className="space-y-6">
-              <h1 className="text-3xl font-bold tracking-tighter">{page.title}</h1>
-              <div className="space-y-2" dangerouslySetInnerHTML={{ __html: page.body }}></div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {isProjectPage ? <ProjectPage page={page} projects={projects} /> : <NormalPage page={page} />}
     </Layout>
   );
 }
 
 export async function getStaticPaths() {
   const pages = await client.getList<PagesContent>({ endpoint: 'pages' });
-  const projectPage = await client.getObject<SettingsResponse>({ endpoint: 'settings' }).then((res) => res.projectPage);
 
-  const paths = pages.contents
-    .filter((page) => page.id !== projectPage.id)
-    .map((page) => ({
-      params: { slug: page.slug },
-    }));
+  const paths = pages.contents.map((page) => ({
+    params: { slug: page.slug },
+  }));
 
   return { paths, fallback: false };
 }
@@ -40,11 +30,33 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: { params: { slug: string } }) {
   const pages = await client.getList<PagesContent>({ endpoint: 'pages' });
   const page = pages.contents.find((p) => p.slug === context.params.slug);
+  if (!page) {
+    return {
+      notFound: true,
+    };
+  }
 
-  return {
-    props: {
-      pages: pages.contents,
-      page,
-    },
-  };
+  const projectPage = await client.getObject<SettingsResponse>({ endpoint: 'settings' }).then((res) => res.projectPage);
+
+  const isProjectPage = page.slug === projectPage.slug;
+
+  if (isProjectPage) {
+    const projects = await client.getList<ProjectsContent>({ endpoint: 'projects' });
+    return {
+      props: {
+        pages: pages.contents,
+        page,
+        isProjectPage,
+        projects: projects.contents,
+      },
+    };
+  } else {
+    return {
+      props: {
+        pages: pages.contents,
+        page,
+        isProjectPage,
+      },
+    };
+  }
 }
