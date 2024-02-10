@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 import NormalPage from '@/components/pages/normalPage';
 import ProjectPage from '@/components/pages/projectPage';
 
@@ -18,11 +20,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
   const pages = (await client.getList<PagesContent>({ endpoint: 'pages' })).contents;
   const page = pages.find((p) => p.slug === slug);
-  if (!page) {
-    return {
-      notFound: true,
-    };
-  }
+  if (!page) notFound();
 
   const projectPage = await client.getObject<SettingsResponse>({ endpoint: 'settings' }).then((res) => res.projectPage);
 
