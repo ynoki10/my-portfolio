@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation';
 
-import NormalPage from '@/components/pages/normalPage';
-import ProjectPage from '@/components/pages/projectPage';
-
+import NormalPage from '@/app/[slug]/pageType/normalPage';
+import ProjectPage from '@/app/[slug]/pageType/projectPage';
 import { getPages, getSettings } from '@/lib/microcms-client';
 
 export async function generateStaticParams() {
