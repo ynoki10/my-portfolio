@@ -1,14 +1,11 @@
 import Link from 'next/link';
 
-type Props = {
-  pages: {
-    id: string;
-    title: string;
-    slug: string;
-  }[];
-};
+import { client } from '@/lib/microcms-client';
+import { PagesContent } from '@/types/apiResponse';
 
-const Header = ({ pages }: Props) => {
+const Header = async () => {
+  const pages = (await client.getList<PagesContent>({ endpoint: 'pages' })).contents;
+
   return (
     <header className="flex h-14 items-center px-4 lg:px-6">
       <Link className="flex items-center justify-center font-bold" href="/">
