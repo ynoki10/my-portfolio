@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import HeaderLink from '@/components/site-parts/Header/headerLink';
+
 import { getPages } from '@/lib/microcms-client';
 
 const Header = async () => {
@@ -12,13 +14,7 @@ const Header = async () => {
       </Link>
       <nav className="ml-auto flex gap-4 sm:gap-6">
         {pages.contents.map((page) => (
-          <Link
-            key={page.id}
-            className="text-sm font-medium underline-offset-4 hover:underline"
-            href={`/${page.slug}/`}
-          >
-            {page.title}
-          </Link>
+          <HeaderLink key={page.id} id={page.id} slug={page.slug} title={page.title} />
         ))}
       </nav>
     </header>
