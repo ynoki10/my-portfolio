@@ -3,12 +3,11 @@ import { notFound } from 'next/navigation';
 import NormalPage from '@/components/pages/normalPage';
 import ProjectPage from '@/components/pages/projectPage';
 
-import { client } from '@/lib/microcms-client';
-import { PagesContent, SettingsResponse } from '@/types/apiResponse';
+import { getPages, getSettings } from '@/lib/microcms-client';
 
 export async function generateStaticParams() {
-  const pages = (await client.getList<PagesContent>({ endpoint: 'pages' })).contents;
-  const paths = pages.map((page) => {
+  const pages = await getPages();
+  const paths = pages.contents.map((page) => {
     return { slug: page.slug };
   });
   return paths;
@@ -16,12 +15,12 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug;
-  const pages = (await client.getList<PagesContent>({ endpoint: 'pages' })).contents;
-  const page = pages.find((p) => p.slug === slug);
+  const pages = await getPages();
+  const page = pages.contents.find((p) => p.slug === slug);
   if (!page) notFound();
 
-  const projectPage = await client.getObject<SettingsResponse>({ endpoint: 'settings' }).then((res) => res.projectPage);
-  const isProjectPage = page.slug === projectPage.slug;
+  const settings = await getSettings();
+  const isProjectPage = page.slug === settings.projectPage.slug;
 
-  return isProjectPage ? <ProjectPage page={page} /> : <NormalPage page={page} />;
+  return isProjectPage ? <ProjectPage id={page.id} /> : <NormalPage id={page.id} />;
 }

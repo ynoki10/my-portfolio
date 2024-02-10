@@ -1,10 +1,12 @@
-import { PagesContent } from '@/types/apiResponse';
+import { getPage } from '@/lib/microcms-client';
 
 type Props = {
-  page: PagesContent;
+  id: string;
 };
 
-const NormalPage = ({ page }: Props) => {
+const NormalPage = async ({ id }: Props) => {
+  const page = await getPage(id);
+
   return (
     <section className="w-full py-12 sm:py-24 md:py-32 lg:py-48">
       <div className="container px-4 md:px-6">
