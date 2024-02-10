@@ -1,13 +1,15 @@
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
+import { client } from '@/lib/microcms-client';
 import { PagesContent, ProjectsContent } from '@/types/apiResponse';
 
 type Props = {
   page: PagesContent;
-  projects: ProjectsContent[];
 };
 
-const ProjectPage = ({ page, projects }: Props) => {
+const ProjectPage = async ({ page }: Props) => {
+  const projects = (await client.getList<ProjectsContent>({ endpoint: 'projects' })).contents;
+
   return (
     <section className="w-full py-12 sm:py-24 md:py-32 lg:py-48">
       <div className="container px-4 md:px-6">

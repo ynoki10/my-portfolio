@@ -8,11 +8,9 @@ import { PagesContent, SettingsResponse } from '@/types/apiResponse';
 
 export async function generateStaticParams() {
   const pages = (await client.getList<PagesContent>({ endpoint: 'pages' })).contents;
-
   const paths = pages.map((page) => {
     return { slug: page.slug };
   });
-
   return paths;
 }
 
@@ -23,13 +21,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   if (!page) notFound();
 
   const projectPage = await client.getObject<SettingsResponse>({ endpoint: 'settings' }).then((res) => res.projectPage);
-
   const isProjectPage = page.slug === projectPage.slug;
 
-  if (isProjectPage) {
-    const projects = (await client.getList({ endpoint: 'projects' })).contents;
-    return <ProjectPage page={page} projects={projects} />;
-  } else {
-    return <NormalPage page={page} />;
-  }
+  return isProjectPage ? <ProjectPage page={page} /> : <NormalPage page={page} />;
 }
