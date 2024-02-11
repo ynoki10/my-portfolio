@@ -29,6 +29,7 @@
     "@markuplint/jsx-parser": "^3.12.0",
     "@markuplint/react-spec": "^3.13.0",
     "@secretlint/secretlint-rule-preset-recommend": "^8.1.1",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
