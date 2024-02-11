@@ -14,7 +14,7 @@ const ProjectPage = async ({ id }: Props) => {
       <ul className="flex flex-wrap gap-4">
         {projects.contents.map((project) => (
           <li key={project.id}>
-            <Card className="w-1/3">
+            <Card className="w-full md:w-1/2">
               <CardHeader>
                 <CardTitle>{project.title}</CardTitle>
               </CardHeader>
