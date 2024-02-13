@@ -17,10 +17,10 @@ export default function Home() {
           </div>
           <div className="space-x-4">
             <Button size="lg" asChild>
-              <Link href="#">About Me</Link>
+              <Link href="/about">プロフィール</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="#">View Projects</Link>
+              <Link href="projects">作ったもの・書いた記事</Link>
             </Button>
           </div>
         </div>

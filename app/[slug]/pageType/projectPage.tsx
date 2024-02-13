@@ -9,7 +9,7 @@ const ProjectPage = async ({ id }: Props) => {
   const projects = await getProjects();
 
   return (
-    <>
+    <div className="space-y-10">
       <h1 className="text-3xl font-bold tracking-tighter">{page.title}</h1>
       <ul className="flex flex-wrap gap-4">
         {projects.contents.map((project) => (
@@ -32,7 +32,7 @@ const ProjectPage = async ({ id }: Props) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
