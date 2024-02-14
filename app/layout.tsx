@@ -48,7 +48,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body>
+      <body className="has-[dialog[open]]:overflow-hidden">
         <div className={'flex min-h-screen flex-col'}>
           <Header />
           <main className="mx-auto max-w-4xl flex-1">{children}</main>
