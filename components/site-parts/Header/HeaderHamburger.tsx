@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 type Props = {
@@ -14,12 +14,11 @@ type Props = {
 
 const HeaderHamburger = ({ pages }: Props) => {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   // ページ遷移を検知
   useEffect(() => {
     closeDialog();
-  }, [pathname, searchParams]);
+  }, [pathname]);
 
   const dialogRef = useRef<HTMLDialogElement>(null);
 
