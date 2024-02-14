@@ -50,7 +50,7 @@ const NormalPage = async ({ id }: Props) => {
           </ul>
         </div>
       )}
-      <div className="prose space-y-2" dangerouslySetInnerHTML={{ __html: page.body }}></div>
+      <div className="prose prose-slate" dangerouslySetInnerHTML={{ __html: page.body }}></div>
     </article>
   );
 };
