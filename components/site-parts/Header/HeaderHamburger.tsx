@@ -1,8 +1,9 @@
 'use client';
 
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
+
+import Link from '@/components/ui/Link';
 
 type Props = {
   pages: {

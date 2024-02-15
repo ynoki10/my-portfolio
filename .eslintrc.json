@@ -1,5 +1,5 @@
 {
-  "plugins": ["unused-imports"],
+  "plugins": ["unused-imports", "strict-dependencies"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended-type-checked",
@@ -29,6 +29,25 @@
         "alphabetize": {
           "order": "asc"
         }
+      }
+    ],
+    // import先を制限する
+    "strict-dependencies/strict-dependencies": [
+      "error",
+      [
+        {
+          "module": "next/link",
+          "allowReferenceFrom": ["components/ui/Link.tsx"],
+          "allowSameModule": false
+        },
+        {
+          "module": "next/image",
+          "allowReferenceFrom": ["components/ui/Image.tsx"],
+          "allowSameModule": false
+        }
+      ],
+      {
+        "resolveRelativeImport": true
       }
     ]
   }

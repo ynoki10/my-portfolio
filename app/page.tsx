@@ -1,5 +1,4 @@
-import Link from 'next/link';
-
+import Link from '@/components/ui/Link';
 import { Button } from '@/components/ui/button';
 
 export default function Home() {
@@ -20,7 +19,7 @@ export default function Home() {
               <Link href="/about">プロフィール</Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="projects">作ったもの・書いた記事</Link>
+              <Link href="/projects">作ったもの・書いた記事</Link>
             </Button>
           </div>
         </div>
