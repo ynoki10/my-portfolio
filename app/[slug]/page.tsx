@@ -44,7 +44,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <article className="space-y-10">
       <h1 className="text-3xl font-bold tracking-tighter">{page.title}</h1>
-      {page.slug === 'about' && (
+      {page.slug === 'profile' && (
         <div className="flex flex-col items-center gap-y-4">
           <Image
             alt="プロフィール画像：はっきりとした線で描かれたポップなイラスト。男性が前方を見上げて口角を上げている。空をイメージした青い背景。"
