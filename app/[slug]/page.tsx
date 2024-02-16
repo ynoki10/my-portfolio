@@ -2,6 +2,7 @@ import { ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import Image from '@/components/ui/Image';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 
 import { genMetadata } from '@/app/metadata';
 import { getPages } from '@/lib/microcms-client';
@@ -81,7 +82,22 @@ export default async function Page({ params }: { params: { slug: string } }) {
           </ul>
         </div>
       )}
-      <div className="prose prose-slate" dangerouslySetInnerHTML={{ __html: page.body }}></div>
+      <div className="prose prose-slate">
+        <div dangerouslySetInnerHTML={{ __html: page.body }}></div>
+        {page.accordions &&
+          page.accordions.map((accordion) => {
+            return (
+              <Accordion type="single" key={accordion.title} collapsible>
+                <AccordionItem value={accordion.title}>
+                  <AccordionTrigger>{accordion.title}</AccordionTrigger>
+                  <AccordionContent>
+                    <div dangerouslySetInnerHTML={{ __html: accordion.body }}></div>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            );
+          })}
+      </div>
     </article>
   );
 }

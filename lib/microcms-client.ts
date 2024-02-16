@@ -8,6 +8,13 @@ type Page = {
   slug: string;
   description: string;
   body: string;
+  accordions:
+    | {
+        fieldId: 'item';
+        title: string;
+        body: string;
+      }[]
+    | null;
 } & MicroCMSDate;
 
 type Project = {
