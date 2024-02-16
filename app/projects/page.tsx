@@ -1,16 +1,29 @@
+import { ResolvingMetadata } from 'next';
+
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
-import { getPage, getProjects } from '@/lib/microcms-client';
-type Props = {
-  id: string;
+import { genMetadata } from '@/app/metadata';
+import { getProjects } from '@/lib/microcms-client';
+
+export const generateMetadata = async (
+  _: {
+    params: { slug: string };
+  },
+  parent: ResolvingMetadata,
+) => {
+  return genMetadata({
+    title: '作ったもの・書いた記事',
+    description: 'これまでの制作実績や執筆記事を紹介しています。',
+    parent,
+  });
 };
-const ProjectPage = async ({ id }: Props) => {
-  const page = await getPage(id);
+
+const Page = async () => {
   const projects = await getProjects();
 
   return (
     <div className="space-y-10">
-      <h1 className="text-3xl font-bold tracking-tighter">{page.title}</h1>
+      <h1 className="text-3xl font-bold tracking-tighter">作ったもの・書いた記事</h1>
       <ul className="flex flex-wrap gap-4">
         {projects.contents.map((project) => (
           <li key={project.id}>
@@ -36,4 +49,4 @@ const ProjectPage = async ({ id }: Props) => {
   );
 };
 
-export default ProjectPage;
+export default Page;
