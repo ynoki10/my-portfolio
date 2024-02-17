@@ -20,8 +20,10 @@ type Page = {
 type Project = {
   id: string;
   title: string;
+  slug: string;
   thumbnail: MicroCMSImage;
   description: string;
+  lead: string;
   body: string;
 } & MicroCMSDate;
 
