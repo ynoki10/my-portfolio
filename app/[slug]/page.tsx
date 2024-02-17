@@ -88,10 +88,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
           page.accordions.map((accordion) => {
             return (
               <Accordion type="single" key={accordion.title} collapsible>
-                <AccordionItem value={accordion.title}>
+                <AccordionItem value={accordion.title} className="prose-h3:mb-0 prose-h3:mt-1">
                   <AccordionTrigger>{accordion.title}</AccordionTrigger>
                   <AccordionContent>
-                    <div dangerouslySetInnerHTML={{ __html: accordion.body }}></div>
+                    <div className="*:first:mt-0" dangerouslySetInnerHTML={{ __html: accordion.body }}></div>
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
