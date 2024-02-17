@@ -27,15 +27,6 @@ type Project = {
   body: string;
 } & MicroCMSDate;
 
-type Settings = {
-  projectPage: {
-    id: string;
-    title: string;
-    slug: string;
-    description: string;
-  } & MicroCMSDate;
-};
-
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
   throw new Error('MICROCMS_SERVICE_DOMAIN is required');
 }
@@ -67,9 +58,4 @@ export const getProjects = async (queries?: MicroCMSQueries) => {
 export const getProject = async (contentId: string, queries?: MicroCMSQueries) => {
   const project = await client.getListDetail<Project>({ endpoint: 'projects', contentId, queries });
   return project;
-};
-
-export const getSettings = async () => {
-  const settings = await client.getObject<Settings>({ endpoint: 'settings' });
-  return settings;
 };
