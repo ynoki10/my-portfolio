@@ -1,3 +1,5 @@
+import { PluginAPI } from 'tailwindcss/types/config';
+
 import type { Config } from 'tailwindcss';
 
 const config = {
@@ -67,13 +69,16 @@ const config = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
-      typography: {
+      typography: (theme: PluginAPI['theme']) => ({
         DEFAULT: {
           css: {
             maxWidth: '100%',
+            a: {
+              color: theme('colors.indigo.800'),
+            },
           },
         },
-      },
+      }),
     },
   },
   plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],
