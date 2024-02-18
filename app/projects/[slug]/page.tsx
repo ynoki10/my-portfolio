@@ -50,13 +50,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
           width={project.thumbnail.width}
           height={project.thumbnail.height}
           decoding="async"
+          className="border"
         />
         <div className="prose prose-slate">
-          <div className="lead">{project.lead}</div>
           {project.body && <div dangerouslySetInnerHTML={{ __html: project.body }}></div>}
         </div>
       </article>
-      <Link href="/projects" className="w-fit text-indigo-800">
+      <Link href="/projects" className="mt-16 w-fit text-indigo-800">
         <span aria-hidden>← </span>
         <span className="underline">一覧へ戻る</span>
       </Link>

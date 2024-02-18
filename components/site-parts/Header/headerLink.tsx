@@ -14,7 +14,7 @@ type Props = {
 
 const HeaderLink = ({ id, slug, title }: Props) => {
   const pathname = usePathname();
-  const isCurrentPage = pathname === `/${slug}`;
+  const isCurrentPage = pathname.startsWith(`/${slug}`);
 
   return (
     <Link

@@ -51,7 +51,7 @@ const Page = async () => {
                     <div className="mb-0 mt-auto flex flex-col space-y-2">
                       {project.body && (
                         <Button size="sm" asChild>
-                          <Link href={`/projects/${project.slug}`}>{project.title}の解説ページ</Link>
+                          <Link href={`/projects/${project.slug}`}>{project.title}の紹介</Link>
                         </Button>
                       )}
                       {project.url && (
