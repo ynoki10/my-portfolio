@@ -22,11 +22,18 @@ type Project = {
   title: string;
   slug: string;
   thumbnail: MicroCMSImage;
-  category: ('プロジェクト' | '記事')[];
   description: string;
-  link?: string;
+  url?: string;
   lead: string;
-  body: string;
+  body?: string;
+} & MicroCMSDate;
+
+type Article = {
+  id: string;
+  title: string;
+  thumbnail: MicroCMSImage;
+  description: string;
+  url: string;
 } & MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
@@ -60,4 +67,14 @@ export const getProjects = async (queries?: MicroCMSQueries) => {
 export const getProject = async (contentId: string, queries?: MicroCMSQueries) => {
   const project = await client.getListDetail<Project>({ endpoint: 'projects', contentId, queries });
   return project;
+};
+
+export const getArticles = async (queries?: MicroCMSQueries) => {
+  const articles = await client.getList<Article>({ endpoint: 'articles', queries });
+  return articles;
+};
+
+export const getArticle = async (contentId: string, queries?: MicroCMSQueries) => {
+  const article = await client.getListDetail<Project>({ endpoint: 'articles', contentId, queries });
+  return article;
 };

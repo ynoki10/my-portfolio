@@ -53,7 +53,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
         />
         <div className="prose prose-slate">
           <div className="lead">{project.lead}</div>
-          <div dangerouslySetInnerHTML={{ __html: project.body }}></div>
+          {project.body && <div dangerouslySetInnerHTML={{ __html: project.body }}></div>}
         </div>
       </article>
       <Link href="/projects" className="w-fit text-indigo-800">
