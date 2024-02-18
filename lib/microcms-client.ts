@@ -25,6 +25,7 @@ type Project = {
   description: string;
   lead: string;
   body: string;
+  link?: string;
 } & MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {

@@ -1,6 +1,8 @@
+import { ExternalLink } from 'lucide-react';
 import { ResolvingMetadata } from 'next';
 
 import Link from '@/components/ui/Link';
+import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 import { genMetadata } from '@/app/metadata';
@@ -25,27 +27,38 @@ const Page = async () => {
   return (
     <div className="space-y-10">
       <h1 className="text-3xl font-bold tracking-tighter">作ったもの・書いた記事</h1>
-      <p>アイテムをクリックすると詳細ページへ移動します。</p>
       <ul className="flex flex-wrap gap-4">
         {projects.contents.map((project) => (
           <li className="w-full md:w-1/2" key={project.id}>
-            <Link href={`/projects/${project.slug}`}>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <img
-                    src={project.thumbnail.url}
-                    alt=""
-                    width={project.thumbnail.width}
-                    height={project.thumbnail.height}
-                    decoding="async"
-                  />
-                  <p>{project.lead}</p>
-                </CardContent>
-              </Card>
-            </Link>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl">{project.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <img
+                  src={project.thumbnail.url}
+                  alt=""
+                  width={project.thumbnail.width}
+                  height={project.thumbnail.height}
+                  decoding="async"
+                  className="border"
+                />
+                <p className="text-sm">{project.lead}</p>
+                <div className="flex flex-col space-y-2">
+                  <Button size="sm" asChild>
+                    <Link href={`/projects/${project.slug}`}>{project.title}の解説ページ</Link>
+                  </Button>
+                  {project.link && (
+                    <Button size="sm" variant="outline" asChild>
+                      <Link href={project.link}>
+                        {project.title}
+                        <ExternalLink className="ml-2 size-[1em]" />
+                      </Link>
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
           </li>
         ))}
       </ul>
