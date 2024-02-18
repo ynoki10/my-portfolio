@@ -10,7 +10,7 @@ export default function Home() {
         </p>
         <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl">Markup & Front-end Engineer</p>
       </div>
-      <div className="space-x-4">
+      <div className="space-x-4 space-y-4">
         <Button size="lg" asChild>
           <Link href="/profile">プロフィール</Link>
         </Button>
