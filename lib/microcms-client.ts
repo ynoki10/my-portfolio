@@ -22,10 +22,11 @@ type Project = {
   title: string;
   slug: string;
   thumbnail: MicroCMSImage;
+  category: ('プロジェクト' | '記事')[];
   description: string;
+  link?: string;
   lead: string;
   body: string;
-  link?: string;
 } & MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
