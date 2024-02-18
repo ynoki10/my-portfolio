@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 
 import { genMetadata } from '@/app/metadata';
 import { getArticles, getProjects } from '@/lib/microcms-client';
+import { nl2br } from '@/lib/utils';
 
 export const generateMetadata = async (
   _: {
@@ -47,7 +48,7 @@ const Page = async () => {
                       decoding="async"
                       className="border"
                     />
-                    <p className="text-sm">{project.lead}</p>
+                    <p className="text-sm" dangerouslySetInnerHTML={{ __html: nl2br(project.lead) }} />
                     <div className="mb-0 mt-auto flex flex-col space-y-2">
                       {project.body && (
                         <Button size="sm" asChild>
@@ -90,7 +91,7 @@ const Page = async () => {
                       decoding="async"
                       className="border"
                     />
-                    <p className="text-sm">{article.description}</p>
+                    <p className="text-sm" dangerouslySetInnerHTML={{ __html: nl2br(article.description) }} />
                     <Link className="text-sm text-indigo-800" href={article.url}>
                       {article.title}
                       <ExternalLink className="ml-0.5 inline-block size-[1em] translate-y-0.5 align-baseline" />
