@@ -1,4 +1,5 @@
 import Image from '@/components/ui/Image';
+import Link from '@/components/ui/Link';
 
 const ProfileHeader = () => {
   return (
@@ -31,9 +32,9 @@ const ProfileHeader = () => {
           },
         ].map(({ href, text }) => (
           <li key={text}>
-            <a className="text-indigo-800 underline" href={href} target="_blank">
+            <Link className="font-medium text-indigo-800 underline" href={href}>
               {text}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>
