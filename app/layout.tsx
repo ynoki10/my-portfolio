@@ -49,9 +49,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ja">
       <body className="has-[dialog[open]]:overflow-hidden">
-        <div className={'flex min-h-screen flex-col'}>
+        <div className={'flex min-h-dvh flex-col'}>
           <Header />
-          <main className="container mx-auto grid max-w-4xl flex-1 items-center px-4 py-24 sm:px-6 md:px-8">
+          <main className="container mx-auto grid max-w-4xl flex-1 items-center px-4 py-10 sm:px-6 sm:py-14 md:px-8 md:py-24">
             {children}
           </main>
           <Footer />
