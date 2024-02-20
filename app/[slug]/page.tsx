@@ -18,7 +18,7 @@ export const generateMetadata = async (
   const slug = params.slug;
   const pages = await getPages();
   const page = pages.contents.find((p) => p.slug === slug);
-  if (!page) throw new Error(`Page not found for slug: ${slug}`);
+  if (!page) return null;
 
   return genMetadata({
     title: page.title,

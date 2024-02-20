@@ -17,7 +17,7 @@ export const generateMetadata = async (
   const slug = params.slug;
   const projects = await getProjects();
   const project = projects.contents.find((p) => p.slug === slug);
-  if (!project) throw new Error(`Project not found for slug: ${slug}`);
+  if (!project) return null;
 
   return genMetadata({
     title: project.title,
